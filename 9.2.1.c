@@ -25,6 +25,10 @@ printf ("Nemoznost vytvorenia matice %ux%u\n", n,n);
 return 1;
 }
 
+tdmat_unit(mat);
+tdmat_print(mat);
+
+
 
 }
 
