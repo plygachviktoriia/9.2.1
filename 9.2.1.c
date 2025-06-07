@@ -36,6 +36,7 @@ tdmat_destroy(mat);
 return 0;
 }
 
+
 TDMAT *tdmat_create_with_type(unsigned int size)
 {
 TDMAT *mat = malloc(sizeof(TDMAT));                   //dynamicka alokacia
@@ -57,23 +58,37 @@ void tdmat_unit(TDMAT *mat)
 if (mat == NULL)
 return;
 
-for (unsigned int i = 0; i <= mat->size; i++)
+for (unsigned int i = 0; i < mat->size; i++)
 {
 mat->diag[i] = 1;
 }
 
-for (unsigned int i = 0; i <= mat->size - 1; i++)
+for (unsigned int i = 0; i < mat->size - 1; i++)
 {
 mat->udiag[i] = 0;
 mat->ldiag[i] = 0;
 }
-
 }
+
 
 void   tdmat_print(const TDMAT *mat)
 {
 if (mat == NULL)
 return;
+
+mat->size;
+
+for (unsigned int i = 0; i < mat->size; i++)
+{
+for (unsigned int j = 0; j < mat->size; j++)
+{
+if (j == i)
+{
+printf("%.2f ", mat->diag[i]);
+}
+}
+}
+
 }
 
 float tdmat_determinant(TDMAT *mat) 
