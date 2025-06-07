@@ -28,7 +28,7 @@ return 1;
 tdmat_unit(mat);
 tdmat_print(mat);
 
-float determinant = tdamt_determinant(mat);            //zapis determinantu
+float determinant = tdmat_determinant(mat);            //zapis determinantu
 printf("Determinant: %.2f\n", determinant);
 
 tdmat_destroy(mat);
@@ -48,6 +48,31 @@ mat->udiag = malloc(sizeof(float) * (size - 1));     //dynamicka alokacia podlia
 mat->diag = malloc(sizeof(float) * size);
 mat->ldiag = malloc(sizeof(float) * (size - 1));
 
+return(mat);
+}
+
+void tdmat_unit(TDMAT *mat) 
+{
+if (mat == NULL)
+return;
+}
+
+void   tdmat_print(const TDMAT *mat)
+{
+if (mat == NULL)
+return;
+}
+
+float tdmat_determinant(TDMAT *mat) 
+{
+if (mat == NULL)
+return;   
+}
+
+void   tdmat_destroy(TDMAT *mat)
+{
+if (mat == NULL)
+return;
 }
 
 
