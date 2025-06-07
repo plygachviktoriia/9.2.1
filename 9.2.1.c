@@ -29,10 +29,20 @@ tdmat_unit(mat);
 tdmat_print(mat);
 
 float determinant = tdamt_determinant(mat);
-printf("Determinant: %f\n", determinant);
+printf("Determinant: %.2f\n", determinant);
 
 tdmat_destroy(mat);
 
 return 0;
 }
+
+TDMAT *tdmat_create_with_type(unsigned int size)
+{
+TDMAT *mat = malloc(sizeof(TDMAT));
+if (mat == NULL)
+return NULL;
+
+}
+
+
 
