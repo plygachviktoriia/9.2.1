@@ -55,6 +55,12 @@ void tdmat_unit(TDMAT *mat)
 {
 if (mat == NULL)
 return;
+
+for (unsigned int i = 0; i <= mat->size; i++)
+{
+mat->diag[i] = 1;
+}
+
 }
 
 void   tdmat_print(const TDMAT *mat)
