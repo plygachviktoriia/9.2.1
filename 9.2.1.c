@@ -113,6 +113,11 @@ void   tdmat_destroy(TDMAT *mat)
 {
 if (mat == NULL)
 return;
+
+free(mat->udiag);
+free(mat->diag);
+free(mat->ldiag);
+free(mat);
 }
 
 
