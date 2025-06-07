@@ -28,7 +28,7 @@ return 1;
 tdmat_unit(mat);
 tdmat_print(mat);
 
-float determinant = tdamt_determinant(mat);
+float determinant = tdamt_determinant(mat);            //zapis determinantu
 printf("Determinant: %.2f\n", determinant);
 
 tdmat_destroy(mat);
@@ -38,9 +38,15 @@ return 0;
 
 TDMAT *tdmat_create_with_type(unsigned int size)
 {
-TDMAT *mat = malloc(sizeof(TDMAT));
+TDMAT *mat = malloc(sizeof(TDMAT));                   //dynamicka alokacia
 if (mat == NULL)
 return NULL;
+
+mat->size = size;                                    //za[is v pole size struktury na ktoru ukazuje ukazovatel mat, hodnotu premennej size
+
+mat->udiag = malloc(sizeof(float) * (size - 1));     //dynamicka alokacia podlia 3 diagonalej
+mat->diag = malloc(sizeof(float) * size);
+mat->ldiag = malloc(sizeof(float) * (size - 1));
 
 }
 
