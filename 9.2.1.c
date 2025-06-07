@@ -28,7 +28,11 @@ return 1;
 tdmat_unit(mat);
 tdmat_print(mat);
 
+float determinant = tdamt_determinant(mat);
+printf("Determinant: %f\n", determinant);
 
+tdmat_destroy(mat);
 
+return 0;
 }
 
