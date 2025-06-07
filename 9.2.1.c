@@ -16,3 +16,10 @@ void   tdmat_random(TDMAT *mat);                      //naplni maticu nahodnymi 
 void   tdmat_print(const TDMAT *mat);                 //vypise maticu mat na obrazovku
 void   tdmat_destroy(TDMAT *mat);                     //uvolnenie pamati po tridiagonalnej matici reprezentovanej typom TDMAT
 
+int main (void) 
+{
+unsigned int n = 6;
+
+
+}
+
