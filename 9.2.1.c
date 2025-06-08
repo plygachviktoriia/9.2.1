@@ -58,7 +58,7 @@ void tdmat_unit(TDMAT *mat)
  if (mat == NULL)
  return;
 
- for (unsigned int i = 0; i < mat->size; i++)
+ for (unsigned int i = 0; i < mat->size; i++)          //hlavna diagonal
  {
   mat->diag[i] = 1;
  }
@@ -110,13 +110,32 @@ if (mat == NULL || mat->size == 0)
   return 0;
  } 
 
+unsigned int n = 6;
+
 float *D = malloc(sizeof(float) * n);
 if (D == NULL)
 {
  return 0;
 }
 
-return;   
+D[0] = mat->diag[0];                  //det podlia 1x1
+
+if (n > 1)
+{
+ D[1] = mat->diag[1] * D[0] - mat->ldiag[0] * mat->udiag[0];    //det 2x2
+}
+
+for (unsigned int i = 2; i < n; i++)                            //pocitanie podlia minorov
+{
+ float a = mat->diag[i];
+ float b = mat->ldiag[i - 1];
+ float c = mat->udiag[i - 1];
+ D[i] = a * D[i - 1] - b * c * D[i - 2];
+}
+
+float determinant = D[n - 1];
+free(D);
+return determinant;  
 }
 
 
@@ -130,6 +149,3 @@ free(mat->diag);
 free(mat->ldiag);
 free(mat);
 }
-
-
-
