@@ -84,21 +84,22 @@ void tdmat_print(const TDMAT *mat)
   {
    if (j == i)
    {
-    printf("%.2f\n", mat->diag[i]);
+    printf("%.2f ", mat->diag[i]);
    }
     else if (j == i + 1 && i < mat->size - 1)
     {
-     printf("%.2f\n", mat->udiag[i]);
+     printf("%.2f ", mat->udiag[i]);
     }
      else if (i == j + 1 && j < mat->size - 1)
      {
-      printf("%.2f\n", mat->ldiag[i]);
+      printf("%.2f ", mat->ldiag[j]);
      }
       else
       {
-       printf("%.2f\n", 0.0);
+       printf("0.00 ");
       }
   }
+printf("\n");
  }
 }
 
@@ -110,7 +111,7 @@ if (mat == NULL || mat->size == 0)
   return 0;
  } 
 
-unsigned int n = 6;
+unsigned int n = mat->size;
 
 float *D = malloc(sizeof(float) * n);
 if (D == NULL)
