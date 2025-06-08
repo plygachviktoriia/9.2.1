@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct{
    unsigned int size;
@@ -7,10 +8,10 @@ typedef struct{
 }TDMAT;
 
 TDMAT *tdmat_create_with_type(unsigned int size);     //vytvorenie zakladnej datovej struktury TDMAT
-void   tdmat_unit(TDMAT *mat);                        //inicializuje maticu ako jednotkovu tridiagonalnu
 void   tdmat_print(const TDMAT *mat);                 //vypise maticu mat na obrazovku
 void   tdmat_destroy(TDMAT *mat);                     //uvolnenie pamati po tridiagonalnej matici reprezentovanej typom TDMAT
 float tdmat_determinant(TDMAT *mat);
+void tdmat_random(TDMAT *mat);
 
 
 int main (void) 
@@ -25,7 +26,7 @@ int main (void)
   return 1;
  }
 
- tdmat_unit(mat);
+ tdmat_random(mat);
  tdmat_print(mat);
 
  float determinant = tdmat_determinant(mat);            //zapis determinantu
@@ -53,20 +54,25 @@ TDMAT *tdmat_create_with_type(unsigned int size)
 }
 
 
-void tdmat_unit(TDMAT *mat) 
+void tdmat_random(TDMAT *mat)
 {
  if (mat == NULL)
  return;
 
+srand((unsigned int)time(NULL));
+
+int cely = rand() % 101 - 50;                      // zaporny a kladny cisla 
+int drob = rand() % 100;
+
  for (unsigned int i = 0; i < mat->size; i++)          //hlavna diagonal
- {
-  mat->diag[i] = 1;
+ { 
+  mat->diag[i] = cely + drob / 100.0f;
  }
 
  for (unsigned int i = 0; i < mat->size - 1; i++)
  {
-  mat->udiag[i] = 0;
-  mat->ldiag[i] = 0;
+  mat->udiag[i] = cely + drob / 100.0f;
+  mat->ldiag[i] = cely + drob / 100.0f;
  }
 }
 
