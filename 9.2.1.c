@@ -61,18 +61,22 @@ void tdmat_random(TDMAT *mat)
 
 srand((unsigned int)time(NULL));
 
-int cely = rand() % 101 - 50;                      // zaporny a kladny cisla 
-int drob = rand() % 100;
-
  for (unsigned int i = 0; i < mat->size; i++)          //hlavna diagonal
  { 
+  int cely = rand() % 101 - 50;                      // zaporny a kladny cisla 
+  int drob = rand() % 100;
   mat->diag[i] = cely + drob / 100.0f;
  }
 
  for (unsigned int i = 0; i < mat->size - 1; i++)
  {
-  mat->udiag[i] = cely + drob / 100.0f;
-  mat->ldiag[i] = cely + drob / 100.0f;
+  int cely1 = rand() % 101 - 50;
+  int drob1 = rand() % 100;
+  mat->udiag[i] = cely1 + drob1 / 100.0f;
+
+  int cely2 = rand() % 101 - 50;  
+  int drob2 = rand() % 100;
+  mat->ldiag[i] = cely2 + drob2 / 100.0f;
  }
 }
 
@@ -90,19 +94,19 @@ void tdmat_print(const TDMAT *mat)
   {
    if (j == i)
    {
-    printf("%.2f ", mat->diag[i]);
+    printf("%.2f  ", mat->diag[i]);
    }
     else if (j == i + 1 && i < mat->size - 1)
     {
-     printf("%.2f ", mat->udiag[i]);
+     printf("%.2f  ", mat->udiag[i]);
     }
      else if (i == j + 1 && j < mat->size - 1)
      {
-      printf("%.2f ", mat->ldiag[j]);
+      printf("%.2f  ", mat->ldiag[j]);
      }
       else
       {
-       printf("0.00 ");
+       printf("0.00  ");
       }
   }
 printf("\n");
