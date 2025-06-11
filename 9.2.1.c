@@ -14,51 +14,13 @@ float tdmat_determinant(TDMAT *mat);
 void tdmat_random(TDMAT *mat);
 
 
-int main (void) 
-{
- unsigned int n = 6;
-
- TDMAT *mat = tdmat_create_with_type(n);
-
- if (mat == NULL)
- {
-  printf ("Nemoznost vytvorenia matice %ux%u\n", n,n);
-  return 1;
- }
-
- tdmat_random(mat);
- tdmat_print(mat);
-
- float determinant = tdmat_determinant(mat);            //zapis determinantu
- printf("Determinant: %.2f\n", determinant);
-
- tdmat_destroy(mat);
-
- return 0;
-}
-
-
-TDMAT *tdmat_create_with_type(unsigned int size)
-{
- TDMAT *mat = malloc(sizeof(TDMAT));                   //dynamicka alokacia
- if (mat == NULL)
- return NULL;
-
- mat->size = size;                                    //za[is v pole size struktury na ktoru ukazuje ukazovatel mat, hodnotu premennej size
-
- mat->udiag = malloc(sizeof(float) * (size - 1));     //dynamicka alokacia podlia 3 diagonalej
- mat->diag = malloc(sizeof(float) * size);
- mat->ldiag = malloc(sizeof(float) * (size - 1));
-
- return(mat);
-}
-
-
 void tdmat_random(TDMAT *mat)
 {
  if (mat == NULL)
- return;
-
+ {
+  return;
+ }
+ 
 srand((unsigned int)time(NULL));
 
  for (unsigned int i = 0; i < mat->size; i++)          //hlavna diagonal
@@ -81,12 +43,36 @@ srand((unsigned int)time(NULL));
 }
 
 
+TDMAT *tdmat_create_with_type(unsigned int size)
+{
+ TDMAT *mat = malloc(sizeof(TDMAT));                   //dynamicka alokacia
+ if (mat == NULL)
+ return NULL;
+
+ mat->size = size;                                    //za[is v pole size struktury na ktoru ukazuje ukazovatel mat, hodnotu premennej size
+
+ mat->udiag = malloc(sizeof(float) * (size - 1));     //dynamicka alokacia podlia 3 diagonalej
+ mat->diag = malloc(sizeof(float) * size);
+ mat->ldiag = malloc(sizeof(float) * (size - 1));
+
+ if ((size > 1 && (mat->udiag == NULL || mat->ldiag == NULL)) || mat->diag == NULL) 
+ {
+  free(mat->udiag);
+  free(mat->diag);
+  free(mat->ldiag);
+  free(mat);
+  return NULL;
+ }
+
+ return(mat);
+}
+
+
 void tdmat_print(const TDMAT *mat)
 {
  if (mat == NULL)
  return;
 
- mat->size;
 
  for (unsigned int i = 0; i < mat->size; i++)
  {
@@ -147,6 +133,32 @@ for (unsigned int i = 2; i < n; i++)                            //pocitanie podl
 float determinant = D[n - 1];
 free(D);
 return determinant;  
+}
+
+
+int main (void) 
+{
+ unsigned int n;
+ printf("Zadaj rozmernost' matice tyou nxn:\n");
+ scanf("%u", &n);
+
+ TDMAT *mat = tdmat_create_with_type(n);
+
+ if (mat == NULL)
+ {
+  printf ("Nemoznost vytvorenia matice %ux%u\n", n,n);
+  return 1;
+ }
+
+ tdmat_random(mat);
+ tdmat_print(mat);
+
+ float determinant = tdmat_determinant(mat);            //zapis determinantu
+ printf("Determinant: %.2f\n", determinant);
+
+ tdmat_destroy(mat);
+
+ return 0;
 }
 
 
